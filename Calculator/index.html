@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>calculator</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: rgb(0, 0, 0);
+      color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .number{
+        font-weight: bold;
+    }
+    .fa-solid{
+      background-color: transparent;
+    }
+    .mobile-container {
+      display: grid;
+      grid-template-rows: 5% auto 60%;
+      height: 100vh;
+      padding: 0.5rem;
+    }
+    .mode-bar {
+      width: 100%;
+      border: 1px solid black;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .screen {
+      width: 100%;
+      border: 1px solid black;
+    }
+    .keypad {
+      width: 100%;
+      border: 1px solid black;
+    }
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 0.5rem;
+    }
+    .key {
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      background-color: rgb(25, 25, 25);
+      cursor: pointer;
+    }
+    .key:hover{
+      filter: brightness(1.3);
+    }
+    .number {
+      background-color: rgb(80, 80, 80);
+    }
+    .CE, .C{
+        background-color: rgb(14, 30, 77);
+    }
+    .delete{
+        background-color: rgb(94, 25, 25);
+    }
+    .equal {
+      grid-column: span 2;
+      background-color: rgb(18, 18, 123);
+    }
+    .hidden {
+      display: none;
+    }
+.history{
+    height: 100vh;
+    border: 1px solid black;
+    
+}
+    @media (max-width: 700px) {
+        
+      .sci {
+        display: none;
+      }
+      .mobile {
+        display: flex;
+      }
+      .key{
+            font-size: 2rem;
+        }
+
+    }
+
+    @media (min-width: 701px) and (max-width: 1000px) {
+        .key{
+            font-size: 1.5rem;
+        }
+      .sci {
+        display: flex;
+      }
+      .mobile {
+        display: none;
+      }
+      .keypad {
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(8, 1fr);
+      }
+      .mobile-container{
+        padding: 2rem;
+      }
+    }
+
+    @media (min-width: 1001px) {
+        .key{
+            font-size: 1.5rem;
+        }
+      .sci {
+        display: flex;
+      }
+      .mobile {
+        display: none;
+      }
+      .keypad {
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(8, 1fr);
+      }
+      .wrapper {
+        display: flex;
+      }
+      .mobile-container{
+        flex: 0 0 70%;
+        padding: 2rem;
+      }
+      .history{
+        flex: 0 0 30%;
+        padding: 2rem;
+      }
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <div class="mobile-container">
+        <div class="mode-bar">
+          <div class="standard">Standard</div>
+          <div class="unit-converter">Unit Converter</div>
+        </div>
+        <div class="screen">hello</div>
+        <div class="keypad">
+          <div class="key operator sci">2nd</div>
+          <div class="key operator sci">mr</div>
+          <div class="key operator sci">m+</div>
+          <div class="key operator sci">mc</div>
+          <div class="key operator sci">e</div>
+          <div class="key operator CE sci">CE</div>
+          <div class="key operator C sci">C</div>
+          <div class="key operator delete sci"><i class="fa-solid fa-delete-left"></i></div>
+
+          <div class="key operator sci">sin</div>
+          <div class="key operator sci">cos</div>
+          <div class="key operator sci">tan</div>
+          <div class="key operator sci">√x</div>
+
+
+          <div class="key delete mobile delete"><i class="fa-solid fa-delete-left"></i></div>
+          <!-- hide on scientific mode / replace with ( -->
+          <div class="key open-parenthesis sci">&#40;</div>
+          <div class="key sign mobile">±</div>
+          <!-- hide on scientific mode / replace with ) -->
+          <div class="key close-parenthesis sci">&#41;</div>
+          <div class="key percent">%</div>
+          <div class="key operator">/</div>
+
+          <div class="key operator sci">sec</div>
+          <div class="key operator sci">csc</div>
+          <div class="key operator sci">cot</div>
+          <div class="key operator sci">ⁿ√x</div>
+          <div class="key number">7</div>
+          <div class="key number">8</div>
+          <div class="key number">9</div>
+          <div class="key operator">*</div>
+
+          <div class="key operator sci">x²</div>
+          <div class="key operator sci">x³</div>
+          <div class="key operator sci">xʸ</div>
+          <div class="key operator sci">eˣ</div>
+          <div class="key number">4</div>
+          <div class="key number">5</div>
+          <div class="key number">6</div>
+          <div class="key operator">-</div>
+
+          <div class="key operator sci">10ˣ</div>
+          <div class="key operator sci">ln</div>
+          <div class="key operator sci">x²</div>
+          <div class="key operator sci">|x|</div>
+          <div class="key number">1</div>
+          <div class="key number">2</div>
+          <div class="key number">3</div>
+          <div class="key operator">+</div>
+
+          <div class="key operator sci">Deg</div>
+          <div class="key operator sci">logₓ</div>
+          <div class="key operator sci">logₓ y</div>
+          <div class="key operator sci">x!</div>
+          <div class="key number">0</div>
+          <div class="key number">.</div>
+          <div class="key equal"><i class="fa-solid fa-equals"></i></div>
+        </div>
+      </div>
+      <div class="history"></div>
+    </div>
+  </body>
+</html>
