@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .timer {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .start-pause, .edit {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #bfbfbf;
+            margin: 0.5rem;
+        }
+        .start-pause:hover, .edit:hover {
+            background-color: #d4d4d4;
+        }
+        .edit-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            background-color: #d4d4d4d7;
+            backdrop-filter: blur(1px);
+        }
+    </style>
+</head>
+<body>
+    <h4>Timer</h4>
+    <div class="timer"></div>
+    <button class="start-pause">Start</button>
+    <button class="edit">Edit</button>
+
+    <div class="edit-box">
+        <div class="hour-box">
+            <label for="hour-select">Select Hours:</label>
+            <select name="hour" id="hour-select" class="hour-select">
+            <!-- load by js -->
+            </select>
+        </div>
+        <div class="minute-box">
+            <label for="minute-select">Select Minutes:</label>
+            <button class="minute-decrement">-</button>
+            <select name="minute" id="minute-select" class="minute-select">
+            <!-- load by js -->
+            </select>
+            <button class="minute-increment">+</button>
+        </div>
+        <button class="set-time">Set Time</button>
+        <button class="cancel">Cancel</button>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
