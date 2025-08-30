@@ -7,12 +7,20 @@ const hourSelectEl = document.querySelector(".hour-select");
 const HourDeEl = document.querySelector(".hour-decrement");
 const HourInEl = document.querySelector(".hour-increment");
 
-
 let currentTime = 1200; //in sec
 let isTimerRunning = false;
 let isStarted = false;
 let timerInterval = null;
 let flagTime;
+
+const themeButton = document.querySelector(".theme");
+const controls = document.querySelector(".controls");
+
+themeButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+    themeButton.classList.toggle("active");
+    controls.classList.toggle("dark-theme");
+})
 
 timer.textContent = formatTime(currentTime); // Initial display
 
@@ -21,11 +29,19 @@ function getMinute(seconds) {
 }
 
 function formatTime(time) {
-  let minutes = getMinute(time);
+  let hours = Math.floor(time / 3600);
+  let minutes = Math.floor((time % 3600) / 60);
   let seconds = time % 60;
-  return `${minutes.toString().padStart(2, "0")} : ${seconds
-    .toString()
-    .padStart(2, "0")}`;
+
+  if (time >= 3600 ) {
+    return `${hours.toString().padStart(2, "0")} : ${minutes
+      .toString()
+      .padStart(2, "0")} : ${seconds.toString().padStart(2, "0")}`;
+  } else {
+    return `${minutes.toString().padStart(2, "0")} : ${seconds.toString().padStart(2, "0")}`;
+  }
+
+  
 }
 
 //main countdown function
@@ -61,7 +77,7 @@ startPauseButton.addEventListener("click", () => {
   if (!isStarted) {
     isStarted = true;
     countdownStart(currentTime);
-    startPauseButton.textContent = "Pause";
+    startPauseButton.innerHTML = "<i class=\"fa-solid fa-pause\"></i>";
     return;
   }
   if (isTimerRunning) {
@@ -75,10 +91,10 @@ function startPause(stage) {
   if (stage === "pause") {
     isTimerRunning = false;
     flagTime = currentTime;
-    startPauseButton.textContent = "Resume";
+    startPauseButton.innerHTML = "<i class=\"fa-solid fa-play\"></i>";
   } else if (stage === "resume") {
     countdownStart(currentTime);
-    startPauseButton.textContent = "Pause";
+    startPauseButton.innerHTML = "<i class=\"fa-solid fa-pause\"></i>";
   }
 }
 
@@ -103,12 +119,12 @@ setTimeButton.addEventListener("click", () => {
   timer.textContent = formatTime(currentTime);
   isStarted = false;
   clearTimer();
-  startPauseButton.textContent = "Start";
+  startPauseButton.innerHTML = "<i class=\"fa-solid fa-play\"></i>";
 });
 
 cancelButton.addEventListener("click", () => {
   editBox.style.display = "none";
-  startPauseButton.textContent = "Resume";
+  startPauseButton.innerHTML = "<i class=\"fa-solid fa-play\"></i>";
   currentTime = flagTime;
 });
 
