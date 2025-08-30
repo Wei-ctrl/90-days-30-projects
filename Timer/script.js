@@ -2,13 +2,17 @@ const timer = document.querySelector(".timer");
 const startPauseButton = document.querySelector(".start-pause");
 const editButton = document.querySelector(".edit");
 const editBox = document.querySelector(".edit-box");
+
 const hourSelectEl = document.querySelector(".hour-select");
+const HourDeEl = document.querySelector(".hour-decrement");
+const HourInEl = document.querySelector(".hour-increment");
 
 
 let currentTime = 1200; //in sec
 let isTimerRunning = false;
 let isStarted = false;
 let timerInterval = null;
+let flagTime;
 
 timer.textContent = formatTime(currentTime); // Initial display
 
@@ -70,6 +74,7 @@ startPauseButton.addEventListener("click", () => {
 function startPause(stage) {
   if (stage === "pause") {
     isTimerRunning = false;
+    flagTime = currentTime;
     startPauseButton.textContent = "Resume";
   } else if (stage === "resume") {
     countdownStart(currentTime);
@@ -104,40 +109,82 @@ setTimeButton.addEventListener("click", () => {
 cancelButton.addEventListener("click", () => {
   editBox.style.display = "none";
   startPauseButton.textContent = "Resume";
+  currentTime = flagTime;
 });
 
 function loadMinuteOptions() {
   // Only add options if not already present
-  if (minuteSelectEl.options.length < 59) {
-    for (let i = 1; i <= 59; i++) {
+  if (minuteSelectEl.options.length < 60) {
+    for (let i = 0; i <= 59; i++) {
       const option = document.createElement("option");
       option.value = i;
-      option.textContent = i;
+      option.textContent = i.toString().padStart(2, '0');
       minuteSelectEl.appendChild(option);
-      if (i === 20) {
+      if (i === 0) {
         option.selected = true;
       }
     }
   }
 }
 
+function loadHourOptions() {
+  // Only add options if not already present
+  if (hourSelectEl.options.length < 24) {
+    for (let i = 0; i <= 23; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = i.toString().padStart(2, '0');
+      hourSelectEl.appendChild(option);
+      if (i === 0) {
+        option.selected = true;
+      }
+    }
+  }
+}
+
+
 MinDeEl.addEventListener("click", () => {
-  if (minuteSelectEl.value > 1) {
+  if (minuteSelectEl.value > 0) {
     minuteSelectEl.value = parseInt(minuteSelectEl.value) - 1;
-    currentTime = parseInt(minuteSelectEl.value) * 60;
+    updateCurrentTimeFromInputs();
   }
 });
 
 MinInEl.addEventListener("click", () => {
   if (minuteSelectEl.value < 59) {
     minuteSelectEl.value = parseInt(minuteSelectEl.value) + 1;
-    currentTime = parseInt(minuteSelectEl.value) * 60;
+    updateCurrentTimeFromInputs();
   }
 });
 
 minuteSelectEl.addEventListener("change", (e) => {
-  currentTime = parseInt(e.target.value) * 60;
+  updateCurrentTimeFromInputs();
 });
 
-// Initialize minute options on page load
+HourDeEl.addEventListener("click", () => {
+  if (hourSelectEl.value > 0) {
+    hourSelectEl.value = parseInt(hourSelectEl.value) - 1;
+    updateCurrentTimeFromInputs();
+  }
+});
+
+HourInEl.addEventListener("click", () => {
+  if (hourSelectEl.value < 23) {
+    hourSelectEl.value = parseInt(hourSelectEl.value) + 1;
+    updateCurrentTimeFromInputs();
+  }
+});
+
+hourSelectEl.addEventListener("change", (e) => {
+  updateCurrentTimeFromInputs();
+});
+
+function updateCurrentTimeFromInputs() {
+  const hours = parseInt(hourSelectEl.value) || 0;
+  const minutes = parseInt(minuteSelectEl.value) || 0;
+  currentTime = hours * 3600 + minutes * 60;
+}
+
+// Initialize hour and minute options on page load
+loadHourOptions();
 loadMinuteOptions();
