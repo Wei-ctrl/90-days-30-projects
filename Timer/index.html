@@ -19,15 +19,16 @@
     />
     <style>
     :root {
-      --font-family-default: 'Shrikhand', sans-serif;
+      --font-family-default: 'Funnel Sans', Arial, sans-serif;
+      --font-family-timer: 'Shrikhand', sans-serif;
       --font-family-dark: 'Cherry Bomb One', cursive;
       --color-bg-default: #FFE3BB;
-      --color-bg-dark: #FF4F0F;
+      --color-bg-dark: #0E2148;
       --color-text-default: #FF4F0F;
-      --color-text-dark: #03A6A1;
+      --color-text-dark: #483AA0;
       --color-btn-bg: #FF4F0F;
-      --color-btn-hover: #03A6A1;
-      --color-btn-shadow: rgba(3, 166, 161, 0.2);
+      --color-btn-bg-dark: #483AA0;
+      --color-btn-hover: #fa7748;
       --color-edit-bg: #FFE3BBcc;
     }
 
@@ -46,14 +47,15 @@
     .dark-theme {
       background-color: var(--color-bg-dark);
       color: var(--color-text-dark);
-      font-family: var(--font-family-dark);
+      font-family: var(--font-family-default);
     }
+    
     .timer {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 10rem;
+      font-size: 12rem;
       height: 60vh;
       padding-top: 5%;
       white-space: nowrap;
@@ -62,7 +64,7 @@
       max-width: 90vw;
       box-sizing: border-box;
       color: inherit;
-      font-family: inherit;
+      font-family: var(--font-family-timer);
     }
     .controls button {
       padding: 0;
@@ -79,7 +81,6 @@
       margin: 0.5rem;
       color: #fff;
       font-family: inherit;
-      box-shadow: 0 2px 8px var(--color-btn-shadow);
       transition: background 0.2s, color 0.2s;
     }
     .controls button:hover {
@@ -88,6 +89,17 @@
     }
     .controls button i{
       color: #fff;
+    }
+    .dark-theme .controls button {
+      background-color: var(--color-btn-bg-dark);
+      color: var(--color-bg-dark);
+    }
+    .dark-theme .controls button:hover {
+      background-color: #6271c8;
+      color: #fff;
+    }
+    .dark-theme .controls button i {
+      color: #151d4b;
     }
     .controls {
       display: flex;
@@ -107,10 +119,102 @@
       justify-content: center;
       align-items: center;
       z-index: 999;
-      background-color: var(--color-edit-bg);
-      backdrop-filter: blur(1px);
+      background: rgba(255, 227, 187, 0.95);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+      border-radius: 32px;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 95vw;
+      max-height: 90vh;
       color: inherit;
       font-family: inherit;
+      backdrop-filter: blur(6px);
+      border: 2px solid #FF4F0F33;
+      transition: box-shadow 0.2s, border 0.2s;
+    }
+    .dark-theme .edit-box {
+      background: rgba(14, 33, 72, 0.98);
+      border: 2px solid #483AA099;
+    }
+    .edit-box label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--color-btn-bg);
+      letter-spacing: 1px;
+    }
+    .dark-theme .edit-box label {
+      color: #fff;
+    }
+    .edit-box .hour-box, .edit-box .minute-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+      background: #fff6e7;
+      border-radius: 16px;
+      padding: 0.7rem 1.2rem;
+      box-shadow: 0 2px 8px #ff4f0f11;
+    }
+    .dark-theme .edit-box .hour-box, .dark-theme .edit-box .minute-box {
+      background: #162a4a;
+      box-shadow: 0 2px 8px #483aa033;
+    }
+    .edit-box button, .edit-box select {
+      font-size: 1.2rem;
+      border-radius: 8px;
+      border: none;
+      margin: 0 0.2rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--color-btn-bg);
+      color: #fff;
+      font-family: inherit;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 4px #ff4f0f22;
+      cursor: pointer;
+    }
+    .edit-box button:hover, .edit-box select:focus {
+      background: var(--color-btn-hover);
+      color: #fff;
+      outline: none;
+    }
+    .dark-theme .edit-box button, .dark-theme .edit-box select {
+      background: #483AA0;
+      color: #fff;
+      box-shadow: 0 1px 4px #483aa044;
+    }
+    .edit-box select {
+      min-width: 3.5rem;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: 1px solid #ff4f0f33;
+      background: #fff;
+      color: #ff4f0f;
+    }
+    .dark-theme .edit-box select {
+      background: #162a4a;
+      color: #fff;
+      border: 1px solid #483AA0;
+    }
+    .edit-box .set-time, .edit-box .cancel {
+      margin-top: 1.2rem;
+      width: 120px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 0.6rem 0;
+      border-radius: 12px;
+      background: var(--color-btn-bg);
+      color: #fff;
+      box-shadow: 0 2px 8px #ff4f0f22;
+      border: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .edit-box .cancel {
+      background: #f86530;
+    }
+    .edit-box .set-time:hover, .edit-box .cancel:hover {
+      filter: brightness(1.1) saturate(1.2);
     }
     .theme {
       cursor: pointer;
@@ -134,22 +238,29 @@
       display: flex;
       gap: 10px;
     }
+    .dark-theme-icon {
+      color: var(--color-text-dark);
+    }
+  .dark-theme-button{
+    background-color: var(--color-btn-bg-dark);
+    color: var(--color-bg-dark);
+  }
+
     </style>
   </head>
   <body>
-    <div class="nav">
-        <button class="theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
-        <button class="edit"><i class="fa-solid fa-sliders"></i></button>
-    </div>
+  <div class="nav">
+    <button class="theme"><i class="icon fa-solid fa-circle-half-stroke"></i></button>
+  </div>
 
     <div class="timer"></div>
 
     <div class="controls">
       <button class="restart">
-        <i class="fa-solid fa-arrow-rotate-left"></i>
+        <i class="icon fa-solid fa-arrow-rotate-left"></i>
       </button>
-      <button class="start-pause"><i class="fa-solid fa-play"></i></button>
-      <button class="done"><i class="fa-solid fa-check"></i></button>
+      <button class="start-pause"><i class="icon fa-solid fa-play"></i></button>
+      <button class="edit"><i class="icon fa-solid fa-sliders"></i></button>
     </div>
 
 

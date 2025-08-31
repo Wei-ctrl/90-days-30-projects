@@ -6,11 +6,14 @@ const editBox = document.querySelector(".edit-box");
 const hourSelectEl = document.querySelector(".hour-select");
 const HourDeEl = document.querySelector(".hour-decrement");
 const HourInEl = document.querySelector(".hour-increment");
+const icons = document.querySelectorAll(".icon");
+const ctrlButtons = document.querySelectorAll(".controls button");
 
 let currentTime = 1200; //in sec
 let isTimerRunning = false;
 let isStarted = false;
 let timerInterval = null;
+let setTime = 1200;
 let flagTime;
 
 const themeButton = document.querySelector(".theme");
@@ -18,8 +21,8 @@ const controls = document.querySelector(".controls");
 
 themeButton.addEventListener("click", () => {
     document.body.classList.toggle("dark-theme");
-    themeButton.classList.toggle("active");
-    controls.classList.toggle("dark-theme");
+    icons.forEach(icon => icon.classList.toggle("dark-theme-icon"));
+    ctrlButtons.forEach(button => button.classList.toggle("dark-theme-button"));
 })
 
 timer.textContent = formatTime(currentTime); // Initial display
@@ -33,11 +36,16 @@ function formatTime(time) {
   let minutes = Math.floor((time % 3600) / 60);
   let seconds = time % 60;
 
+  // Responsive font size using clamp for both hour and minute display
   if (time >= 3600 ) {
+          timer.style.fontSize = "clamp(2rem, 15vw, 12rem)";
+
     return `${hours.toString().padStart(2, "0")} : ${minutes
       .toString()
       .padStart(2, "0")} : ${seconds.toString().padStart(2, "0")}`;
   } else {
+        timer.style.fontSize = "clamp(2rem, 18vw, 16rem)";
+
     return `${minutes.toString().padStart(2, "0")} : ${seconds.toString().padStart(2, "0")}`;
   }
 
@@ -117,6 +125,7 @@ editButton.addEventListener("click", () => {
 setTimeButton.addEventListener("click", () => {
   editBox.style.display = "none";
   timer.textContent = formatTime(currentTime);
+  setTime = currentTime;
   isStarted = false;
   clearTimer();
   startPauseButton.innerHTML = "<i class=\"fa-solid fa-play\"></i>";
@@ -202,5 +211,19 @@ function updateCurrentTimeFromInputs() {
 }
 
 // Initialize hour and minute options on page load
+
+const restartButton = document.querySelector(".restart")
+restartButton.addEventListener("click", restartTimer);
+
+function restartTimer(){
+  timer.textContent = formatTime(setTime);
+  isStarted = false;
+  clearTimer();
+  startPauseButton.innerHTML = "<i class=\"fa-solid fa-play\"></i>";
+}
+
+const doneButton = document.querySelector(".done");
+
+
 loadHourOptions();
 loadMinuteOptions();
