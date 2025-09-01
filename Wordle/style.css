@@ -1,0 +1,7 @@
+.grid{
+    display: grid;
+    grid-template-rows: repeat(6,1fr);
+}
+.cell{
+    width: 50px;
+}
