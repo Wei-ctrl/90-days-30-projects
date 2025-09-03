@@ -1,8 +1,36 @@
 const gridEl = document.querySelector(".grid");
 
+const words = [
+  "apple",
+  "grape",
+  "pearl",
+  "stone",
+  "flame",
+  "chair",
+  "table",
+  "plant",
+  "light",
+  "smile",
+  "water",
+  "bread",
+  "storm",
+  "green",
+  "cloud",
+  "sweet",
+  "tiger",
+  "zebra",
+  "mouse",
+  "house"
+];
+
+function getRandom(words){
+    return words[Math.floor(Math.random() * words.length)]
+}
+
 let activeCell = null;
-let answer = "";
+let input = "";
 let currentRow = 0;
+let answer = getRandom(words);
 
 function createCells(row){
     gridEl.innerHTML = ""; //clear the board
@@ -35,11 +63,14 @@ function createCells(row){
 
             cell.addEventListener("keydown", (e) => {
                 if(e.key === 'Enter'){
-                    //check Answer
-                    //console.log('checking answer');
-                    //check can be answered
                     if(canAnswer()) {
                         console.log('can answer');
+                        for(let j = 0; j < 5; j++){
+                            const cell = document.getElementById(`row-${currentRow}-col-${j}`);
+                            input += cell.value;
+                        }
+                        checkAnswer(answer, input);
+                        input = '';
                         currentRow++;
                         document.getElementById(`row-${currentRow}-col-0`)?.focus();
                         controlRow(currentRow);
@@ -58,7 +89,6 @@ function createCells(row){
 
                 const prevCell = document.getElementById(`row-${i}-col-${j-1}`);
                 if(prevCell && e.key === 'Backspace' && !cell.value){
-                    //activeCell.value = ''
                     prevCell?.focus();
                 }
             })
@@ -83,6 +113,53 @@ function createCells(row){
         inputs.forEach((input) => input.removeAttribute("readonly"));
       }
     }
+
+function checkAnswer(answer, input){
+    const map = new Map();
+    for (let i = 0; i < answer.length; i++) {
+        let key = answer[i].toLowerCase();
+        if(!map.has(key)){
+            map.set(key, []);
+        }
+        map.get(key).push(i);
+    }
+    for(let i = 0; i < input.length; i++){
+        let char = input[i].toLowerCase();   
+        if(map.has(char)){
+            let indexSet = new Set(map.get(char))
+            console.log(indexSet);
+            for(let item of indexSet){
+                if(i === item){
+                    console.log('change green at', i);
+                    changeGreen(i)
+                } else {
+                    changeYellow(i)
+                }
+            }
+        }
+    }
+    if(answer === input.toLowerCase()){
+        console.log('you win');
+    } else if(currentRow === 5 && answer !== input.toLowerCase()){
+        console.log('you lose');
+    }    
+    map.clear()
+}
+
+
+function changeYellow(charIndex){
+    const cell = document.getElementById(`row-${currentRow}-col-${charIndex}`);
+    if(cell){
+        cell.classList.add('contains');
+    }
+}
+
+function changeGreen(charIndex){
+    const cell = document.getElementById(`row-${currentRow}-col-${charIndex}`);
+    if(cell){
+        cell.classList.add('correct');
+    }
+}
 
 createCells(6);
 controlRow(currentRow)
