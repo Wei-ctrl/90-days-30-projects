@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">Shel Plan</div>
+      <div class="right">
+        <div class="setting" tabindex="0" role="button">
+          <i class="fa-solid fa-gear"></i>
+          <span>Setting</span>
+        </div>
+        <div class="notification"><i class="fa-regular fa-bell"></i></div>
+        <div class="profile"><i class="fa-regular fa-user"></i></div>
+      </div>
+    </nav>
+    <aside class="sidebar">
+      <div class="sidebar-links">
+        <a href="#" class="active"
+          ><i class="fa-solid fa-list-check"></i> Challanges</a
+        >
+        <a href="#"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+        <a href="#"><i class="fa-solid fa-image"></i> Gallery</a>
+      </div>
+    </aside>
+    <div class="challenge-container flex-start">
+      <!-- ----------------------- -->
+      <div class="no-task">
+        <i class="no-task-icon fa-solid fa-list-check"></i>
+        <h3>No Active Challenges</h3>
+        <p>Create a new challenge to get started!</p>
+        <button id="create-challenge-btn">Create A Challenge</button>
+      </div>
+      <!-- ----------------------- -->
+      <div class="edit-task">
+        <div class="cancel-button">cancel</div>
+        <div class="save-button">Save</div>
+
+        <h2>New Challenge</h2>
+        <div class="edit-container">
+
+          <div class="edit-left">
+            <form action="">
+              <div class="form-group name">
+                <label class="labels" for="name">Name</label>
+                <input type="text" placeholder="e.g Drink Water" id="name" />
+              </div>
+              <div class="form-group outcomes">
+                <label class="labels" for="description">Outcomes</label>
+                <textarea
+                  id="description"
+                  placeholder="What do you want to achieve?"
+                  rows="8"
+                  cols="60"
+                  style="resize: none;"
+                ></textarea>
+              </div>
+            </form>
+            
+          </div>
+          <div class="edit-right">
+            <div class="form-group group">
+              <label class="labels" for="group">Group</label>
+              <select name="group" id="group">
+                <option value="personal" selected>Health</option>
+                <option value="new">New Group</option>
+              </select>
+            </div>
+            <div class="form-group details">
+              <span class="labels">Details</span>
+              <div class="details-container">
+                <div class="start-date">
+                  <label class="labels" for="start-date">Start Date</label>
+                  <input type="date" id="start-date" name="start-date" />
+                </div>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                  const today = new Date().toISOString().split('T')[0];
+                  document.getElementById('start-date').value = today;
+                  });
+                </script>
+                <div class="frequency">
+                  <label class="labels" for="frequency">Frequency</label>
+                  <select name="frequency" id="frequency">
+                    <option value="daily" selected>Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                </div>
+                <div class="duration">
+                  <label class="labels" for="duration">Duration</label>
+                  <select name="duration" id="duration">
+                    <option value="short">7 Days</option>
+                    <option value="medium" selected>30 Days</option>
+                    <option value="long">12 Weeks</option>
+                    <option value="custom">6 Months</option>
+                    <option value="custom">1 Year</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
