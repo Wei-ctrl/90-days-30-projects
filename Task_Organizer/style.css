@@ -1,3 +1,23 @@
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  font-size: 1.2rem;
+  border: 1px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.add:hover, .add:focus {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
 
 /* Sidebar styles */
 .sidebar {
@@ -212,7 +232,7 @@ body {
 
 .no-task {
   text-align: center;
-  display: none;
+  display: block;
 }
 
 
@@ -275,6 +295,11 @@ button:hover, .no-task button:hover {
 
 .flex-start {
   align-items: flex-start;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
 }
 
 .edit-container{
@@ -348,9 +373,8 @@ button:hover, .no-task button:hover {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 20px 30px;
-
+  padding-left: 50px;
 }
 
 .edit-left form{
@@ -406,3 +430,17 @@ option{
   border: none;
 }
 
+.edit-actions{
+  width: 90%;
+  gap: 18px;
+}
+
+.edit-task-title{
+  margin: 16px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+}

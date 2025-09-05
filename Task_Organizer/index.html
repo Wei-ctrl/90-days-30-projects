@@ -14,6 +14,7 @@
     <nav>
       <div class="logo">Shel Plan</div>
       <div class="right">
+        <div class="add"><i class="fa-solid fa-plus"></i></div>
         <div class="setting" tabindex="0" role="button">
           <i class="fa-solid fa-gear"></i>
           <span>Setting</span>
@@ -31,7 +32,7 @@
         <a href="#"><i class="fa-solid fa-image"></i> Gallery</a>
       </div>
     </aside>
-    <div class="challenge-container flex-start">
+    <div class="challenge-container center">
       <!-- ----------------------- -->
       <div class="no-task">
         <i class="no-task-icon fa-solid fa-list-check"></i>
@@ -40,11 +41,10 @@
         <button id="create-challenge-btn">Create A Challenge</button>
       </div>
       <!-- ----------------------- -->
-      <div class="edit-task">
-        <div class="cancel-button">cancel</div>
-        <div class="save-button">Save</div>
+      <div class="edit-task hidden">
+                  <h2 class="edit-task-title">New Challenge</h2>
 
-        <h2>New Challenge</h2>
+        
         <div class="edit-container">
 
           <div class="edit-left">
@@ -70,8 +70,8 @@
             <div class="form-group group">
               <label class="labels" for="group">Group</label>
               <select name="group" id="group">
-                <option value="personal" selected>Health</option>
-                <option value="new">New Group</option>
+                <option value="Health" selected>Health</option>
+                <option value="New Group">New Group</option>
               </select>
             </div>
             <div class="form-group details">
@@ -90,26 +90,33 @@
                 <div class="frequency">
                   <label class="labels" for="frequency">Frequency</label>
                   <select name="frequency" id="frequency">
-                    <option value="daily" selected>Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="custom">Custom</option>
+                    <option value="Daily" selected>Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Custom">Custom</option>
                   </select>
                 </div>
                 <div class="duration">
                   <label class="labels" for="duration">Duration</label>
                   <select name="duration" id="duration">
-                    <option value="short">7 Days</option>
-                    <option value="medium" selected>30 Days</option>
-                    <option value="long">12 Weeks</option>
-                    <option value="custom">6 Months</option>
-                    <option value="custom">1 Year</option>
-                    <option value="custom">Custom</option>
+                    <option value="7 Days">7 Days</option>
+                    <option value="30 Days" selected>30 Days</option>
+                    <option value="12 Weeks">12 Weeks</option>
+                    <option value="6 Months">6 Months</option>
+                    <option value="1 Year">1 Year</option>
+                    <option value="Custom">Custom</option>
                   </select>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="edit-actions" style="display: flex; align-items: center; justify-content: flex-end; margin-bottom: 18px; margin-right:24px">
+          <button class="cancel-button" type="button">Cancel</button>
+          <button class="save-button" type="button">Save</button>
+        </div>
+      </div>
+      <div class="challanges">
         </div>
       </div>
     </div>
