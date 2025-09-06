@@ -41,12 +41,9 @@
         <button id="create-challenge-btn">Create A Challenge</button>
       </div>
       <!-- ----------------------- -->
-      <div class="edit-task hidden">
-                  <h2 class="edit-task-title">New Challenge</h2>
-
-        
+      <div class="edit-task">
+        <h2 class="edit-task-title">New Challenge</h2>
         <div class="edit-container">
-
           <div class="edit-left">
             <form action="">
               <div class="form-group name">
@@ -116,7 +113,13 @@
           <button class="save-button" type="button">Save</button>
         </div>
       </div>
-      <div class="challanges">
+      <!-- ----------------------- -->
+      <div class="challenges">
+        <h3>Challenges</h3>
+        <div class="challenge-list">
+          <ul>
+            ${challengeList.map(title => `<li><strong>${title}</strong></li>`).join('')}
+          </ul>
         </div>
       </div>
     </div>

@@ -6,18 +6,22 @@ const addBtn = document.querySelector('.add');
 const challengesDiv = document.querySelector('.challenges');
 
 createChallengeBtn.addEventListener('click', () => {
-    noTaskDiv.classList.toggle('hidden');
-    challengeContainer.classList.toggle('flex-start');
-    editTaskDiv.classList.toggle('hidden');
+    noTaskDiv.classList.add('hidden');
+
+        editTaskDiv.classList.remove('hidden');
+        challengeContainer.classList.add('flex-start');
+
+        challengesDiv.classList.add('hidden');
 });
 
 if (addBtn) {
     addBtn.addEventListener('click', () => {
-        //if (noTaskDiv) noTaskDiv.classList.add('hidden');
+        noTaskDiv.classList.add('hidden');
+
         editTaskDiv.classList.remove('hidden');
         challengeContainer.classList.add('flex-start');
-        const challengeSummary = document.querySelector('.challenge-summary');
-        if (challengeSummary) challengeSummary.classList.add('hidden');
+
+        challengesDiv.classList.add('hidden');
     });
 }
 
@@ -36,8 +40,8 @@ if (savedChallenges.length > 0) {
 
 if (cancelBtn) {
     cancelBtn.addEventListener('click', () => {
-        console.log('Cancel button clicked: action working');
-        // Optionally, you can hide the edit-task or reset the form here
+        //need to clear inputs
+        init()
     });
 }
 
@@ -67,13 +71,34 @@ if (saveBtn) {
             editTaskDiv.classList.add('hidden');
         }
         challengeContainer.classList.remove('flex-start');
-        challengesDiv.innerHTML = `
-          <div class="challenge-summary">
-            <h2>Upcoming Challenges</h2>
-            <ul>
-              ${challengeList.map(title => `<li><strong>${title}</strong></li>`).join('')}
-            </ul>
-          </div>
-        `;
+        challengesDiv.classList.remove('hidden');
+        //challengesDiv.innerHTML = `
+        //  <div class="challenge-summary">
+        //    <h2>Upcoming Challenges</h2>
+        //    <ul>
+        //      ${challengeList.map(title => `<li><strong>${title}</strong></li>`).join('')}
+        //    </ul>
+        //  </div>
+        //`;
     });
 }
+
+function init(){
+    if (challengeList.length > 0) {
+        noTaskDiv.classList.add('hidden');
+
+        editTaskDiv.classList.add('hidden');
+        challengeContainer.classList.remove('flex-start');
+
+        challengesDiv.classList.remove('hidden');
+    } else {
+        noTaskDiv.classList.remove('hidden');
+
+        editTaskDiv.classList.add('hidden');
+        challengeContainer.classList.add('flex-start');
+
+        challengesDiv.classList.add('hidden');
+    }
+}
+
+init()
