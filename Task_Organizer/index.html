@@ -32,7 +32,7 @@
         <a href="#"><i class="fa-solid fa-image"></i> Gallery</a>
       </div>
     </aside>
-    <div class="challenge-container center">
+    <div class="challenge-container">
       <!-- ----------------------- -->
       <div class="no-task">
         <i class="no-task-icon fa-solid fa-list-check"></i>
@@ -57,11 +57,10 @@
                   placeholder="What do you want to achieve?"
                   rows="8"
                   cols="60"
-                  style="resize: none;"
+                  style="resize: none"
                 ></textarea>
               </div>
             </form>
-            
           </div>
           <div class="edit-right">
             <div class="form-group group">
@@ -79,9 +78,9 @@
                   <input type="date" id="start-date" name="start-date" />
                 </div>
                 <script>
-                  document.addEventListener('DOMContentLoaded', function() {
-                  const today = new Date().toISOString().split('T')[0];
-                  document.getElementById('start-date').value = today;
+                  document.addEventListener("DOMContentLoaded", function () {
+                    const today = new Date().toISOString().split("T")[0];
+                    document.getElementById("start-date").value = today;
                   });
                 </script>
                 <div class="frequency">
@@ -108,7 +107,16 @@
             </div>
           </div>
         </div>
-        <div class="edit-actions" style="display: flex; align-items: center; justify-content: flex-end; margin-bottom: 18px; margin-right:24px">
+        <div
+          class="edit-actions"
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 18px;
+            margin-right: 24px;
+          "
+        >
           <button class="cancel-button" type="button">Cancel</button>
           <button class="save-button" type="button">Save</button>
         </div>
@@ -117,9 +125,8 @@
       <div class="challenges">
         <h3>Challenges</h3>
         <div class="challenge-list">
-          <ul>
-            ${challengeList.map(title => `<li><strong>${title}</strong></li>`).join('')}
-          </ul>
+          <!-- Challenge items will be dynamically added here -->
+          
         </div>
       </div>
     </div>
